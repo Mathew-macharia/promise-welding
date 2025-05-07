@@ -173,17 +173,16 @@
 
         /* Hero Section */
         .hero {
-                    height: 100vh;
-                    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/landing.jpg') no-repeat center center/cover;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    text-align: center;
-                    padding: 0 2rem;
-                    color: white;
-                }
-
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/landing.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            color: white;
+        }
 
         .hero h1 {
             font-size: 3.5rem;
@@ -306,11 +305,26 @@
             color: white;
         }
 
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        /* Updated Testimonials Carousel Styles */
+        .testimonial-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto 0;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            display: none;
+            animation: fadeEffect 1s;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0.4}
+            to {opacity: 1}
         }
 
         .testimonial-card {
@@ -318,6 +332,7 @@
             border-radius: 5px;
             padding: 2rem;
             position: relative;
+            min-height: 200px;
         }
 
         .testimonial-text {
@@ -335,6 +350,53 @@
             right: 1rem;
             font-size: 2rem;
             opacity: 0.2;
+        }
+
+        /* Carousel Controls */
+        .carousel-controls {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .carousel-arrow {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 0 0.5rem;
+            transition: var(--transition);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-arrow:hover {
+            background-color: var(--primary-color);
+        }
+
+        .carousel-dots {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .carousel-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .carousel-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.2);
         }
 
         /* Contact Section */
@@ -520,8 +582,7 @@
 
             /* Single column layout for small phones */
             .gallery-grid,
-            .services-grid,
-            .testimonials-grid {
+            .services-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -548,6 +609,18 @@
             
             .btn {
                 padding: 0.85rem 1.5rem;
+            }
+            
+            /* Make carousel controls more touch-friendly */
+            .carousel-arrow {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .carousel-dot {
+                width: 10px;
+                height: 10px;
+                margin: 0 4px;
             }
         }
         
@@ -697,31 +770,46 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- Testimonials Section with Carousel -->
     <section id="testimonials" class="testimonials">
         <div class="container">
             <h2>What Our Clients Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="quote-icon">❝</div>
-                    <div class="testimonial-text">
-                        <p>Promise Welding delivered exactly what I wanted for my home security gates. The craftsmanship is outstanding, and they completed the project ahead of schedule. I highly recommend their services to anyone looking for quality metalwork.</p>
+            <div class="testimonial-carousel">
+                <div class="testimonial-slide active">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">❝</div>
+                        <div class="testimonial-text">
+                            <p>Promise Welding delivered exactly what I wanted for my home security gates. The craftsmanship is outstanding, and they completed the project ahead of schedule. I highly recommend their services to anyone looking for quality metalwork.</p>
+                        </div>
+                        <div class="testimonial-author">- Sarah Njeri, Nakuru</div>
                     </div>
-                    <div class="testimonial-author">- Sarah Njeri, Nakuru</div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="quote-icon">❝</div>
-                    <div class="testimonial-text">
-                        <p>Despite being located in Nairobi, Promise Welding was able to deliver and install my custom window frames without any issues. The attention to detail and the quality of work was impressive. Will definitely use their services again.</p>
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">❝</div>
+                        <div class="testimonial-text">
+                            <p>Despite being located in Nairobi, Promise Welding was able to deliver and install my custom window frames without any issues. The attention to detail and the quality of work was impressive. Will definitely use their services again.</p>
+                        </div>
+                        <div class="testimonial-author">- James Odhiambo, Nairobi</div>
                     </div>
-                    <div class="testimonial-author">- James Odhiambo, Nairobi</div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="quote-icon">❝</div>
-                    <div class="testimonial-text">
-                        <p>I needed custom railings for my new office building, and Promise Welding exceeded my expectations. The designs were unique, the execution flawless, and the team was professional throughout the project.</p>
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">❝</div>
+                        <div class="testimonial-text">
+                            <p>I needed custom railings for my new office building, and Promise Welding exceeded my expectations. The designs were unique, the execution flawless, and the team was professional throughout the project.</p>
+                        </div>
+                        <div class="testimonial-author">- Mary Wanjiku, Nakuru Business Center</div>
                     </div>
-                    <div class="testimonial-author">- Mary Wanjiku, Nakuru Business Center</div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-arrow prev-slide">&lt;</button>
+                    <button class="carousel-arrow next-slide">&gt;</button>
+                </div>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" data-slide="0"></span>
+                    <span class="carousel-dot" data-slide="1"></span>
+                    <span class="carousel-dot" data-slide="2"></span>
                 </div>
             </div>
         </div>
@@ -737,14 +825,14 @@
                         <div class="contact-icon">📞</div>
                         <div class="contact-detail">
                             <h3>Call Us</h3>
-                            <p><a href="tel:+254700000000">+254 700 000 000</a></p>
+                            <p><a href="tel:+254 700 575082">+254 700 575082</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">📱</div>
                         <div class="contact-detail">
                             <h3>WhatsApp</h3>
-                            <p><a href="https://wa.me/254700000000">+254 700 000 000</a></p>
+                            <p><a href="https://wa.me/+254 700 575082">+254 700 575082</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -800,5 +888,75 @@
             </div>
         </div>
     </footer>
+
+    <!-- Testimonial Carousel Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Testimonials Carousel functionality
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.querySelector('.prev-slide');
+            const nextBtn = document.querySelector('.next-slide');
+            let currentSlide = 0;
+            let slideInterval;
+
+            // Initialize the carousel
+            function startSlideshow() {
+                slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+
+            function showSlide(n) {
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Set the current slide index
+                currentSlide = (n + slides.length) % slides.length;
+                
+                // Show the current slide and dot
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', function() {
+                clearInterval(slideInterval); // Reset the timer when manually changing slides
+                prevSlide();
+                startSlideshow(); // Restart the slideshow
+            });
+
+            nextBtn.addEventListener('click', function() {
+                clearInterval(slideInterval); // Reset the timer when manually changing slides
+                nextSlide();
+                startSlideshow(); // Restart the slideshow
+            });
+
+            // Add click event to dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    clearInterval(slideInterval); // Reset the timer when manually changing slides
+                    showSlide(index);
+                    startSlideshow(); // Restart the slideshow
+                });
+            });
+
+            // Start the slideshow
+            startSlideshow();
+        });
+    </script>
 </body>
 </html>
